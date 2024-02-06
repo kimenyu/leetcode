@@ -3,12 +3,26 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: int
-        """   
-        for i in range(len(nums)):
-            count = 0
-            for j in range(len(nums)):
-                if nums[i] == nums[j]:
-                    count += 1
-            if count > len(nums) /2:
-                return nums[i]
-nums = [2, 2, 1, 1, 1, 1, 1, 1, 2, 2]
+        """
+        candidate = None
+        count = 0
+        
+        # Step 1: Find the potential candidate for majority element
+        for num in nums:
+            if count == 0:
+                candidate = num
+                count = 1
+            elif num == candidate:
+                count += 1
+            else:
+                count -= 1
+        
+        # Step 2: Validate if the candidate is the majority element
+        count = 0
+        for num in nums:
+            if num == candidate:
+                count += 1
+        if count > len(nums) / 2:
+            return candidate
+        else:
+            return None  # If no majority element found, return None
