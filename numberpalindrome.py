@@ -5,6 +5,7 @@ class Solution(object):
         :rtype: bool
         """
         x = str(x)
-        for i in range(len(x)):
-            for j in range(len(x))[::-1]:
-                return x[i] == x[j]
+        for i in range(len(x) // 2):  
+            if x[i] != x[len(x) - 1 - i]:
+                return False
+        return True
